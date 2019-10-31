@@ -1,3 +1,10 @@
+/*
+ * CoffeePotUtils.cpp
+ *
+ *  Created on: October 30, 2019
+ *      Author: Harsohail Brar
+ */
+
 #include "CoffeePotUtils.h"
 
 bool getBit(unsigned short int bitPattern, unsigned int bit){

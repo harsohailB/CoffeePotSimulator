@@ -1,3 +1,10 @@
+/*
+ * My_CoffeePot_Main_Harsohail2019.cpp
+ *
+ *  Created on: October 30, 2019
+ *      Author: Harsohail Brar
+ */
+
 #include <stdio.h>
 #include "../../ENCM511_SpecificFiles/ENCM511_include/CoffeePot_SimulatorFunctions2017.h"
 #include "My_CoffeePotFunctions_Harsohail2019.h"
@@ -7,7 +14,11 @@
 #define MAX_TEMPERATURE	80
 #define NUM_COFFEE_POTS 1
 
-#define DESIGN_PLAN2
+#define DESIGN_PLAN2 1
+#define LATER 1
+#define EVEN_LATER 1
+#define FINAL_CONTROL 1
+#define ASSEMBLY 1
 
 void My_CoffeePot_Main_Harsohail2019(){
 
@@ -43,6 +54,10 @@ void My_CoffeePot_Main_Harsohail2019(){
 	bool continueDemonstrate_LEDControl = true;
 	unsigned long int secondsCounter = 0;
 
+#endif
+
+#ifndef ASSEMBLY
+
 	while(continueDemonstrate_LEDControl){
 		Demonstrate_LEDControl_Harsohail_CPP(pMyCoffeePot1);
 		if(++secondsCounter >= MAX_SECONDS){
@@ -50,31 +65,34 @@ void My_CoffeePot_Main_Harsohail2019(){
 		}
 	}
 
-
 #endif
 
 #ifdef LATER
+#ifdef ASSEMBLY
 
 	bool continueDemonstrate_LEDControl_ASM = true;
 	while(continueDemonstrate_LEDControl_ASM){
-		Demonstrate_LEDControl_Harsohail_ASM();
+		Demonstrate_LEDControl_Harsohail_ASM(pMyCoffeePot1);
+		FastForward_OneSimulationTIC(pMyCoffeePot1); 	// TODO remove FastForward from main after testing
 		if(++secondsCounter >= MAX_SECONDS){
 			continueDemonstrate_LEDControl_ASM = false;
 		}
 	}
 
 #endif
+#endif
 
 #ifdef EVEN_LATER
 
-	Activate_Water_Control_Harsohail();
+	Activate_Water_Control_Harsohail(pMyCoffeePot1);
 	bool continueDemonstrate_WaterControl = true;
-	unsigned long int secondsCounter = 0;
+	secondsCounter = 0;
 
 	while(continueDemonstrate_WaterControl){
-		FillCoffeePotToWaterLevel_Harsohail(MAX_WATER_LEVEL);
+		FillCoffeePotToWaterLevel_Harsohail(pMyCoffeePot1, MAX_WATER_LEVEL);
+		FastForward_OneSimulationTic(pMyCoffeePot1);
 		if(++secondsCounter >= MAX_SECONDS){
-			continueDeomstrate_WaterControl = false;nnn
+			continueDemonstrate_WaterControl = false;
 		}
 	}
 
@@ -82,11 +100,15 @@ void My_CoffeePot_Main_Harsohail2019(){
 
 #ifdef FINAL_CONTROL
 
+	Activate_Heater_Control_Harsohail(pMyCoffeePot1);
 	bool continueDemonstrate_Both_Temp_Water = true;
-	while(continueDemonstrate_HeaterControl){
-		Control_Both_Temp_Water(MAX_WATER_LEVEL, MAX_TEMPERATURE);
+	secondsCounter = 0;
+
+	while(continueDemonstrate_Both_Temp_Water){
+		Control_Both_Temp_Water(pMyCoffeePot1, MAX_WATER_LEVEL, MAX_TEMPERATURE);
+		FastForward_OneSimulationTic(pMyCoffeePot1);
 		if(++secondsCounter >= MAX_SECONDS){
-			continueDemonstrate_HeaterControl = false;
+			continueDemonstrate_Both_Temp_Water = false;
 		}
 	}
 

@@ -10,7 +10,7 @@
 
 #include "CoffeePotUtils.h"
 
-void turnOffLEDS(COFFEEPOT_DEVICE *pCoffeePot);
+void turnOffLED(COFFEEPOT_DEVICE *pCoffeePot, unsigned short int LED_BIT);
 void turnOnLED(COFFEEPOT_DEVICE *pCoffeePot, unsigned int LED_BIT);
 
 #endif
